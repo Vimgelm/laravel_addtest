@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\AddtestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +32,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('test',function (){
-    return view('hello');
+    return view('test');
 });
+
+Route::get('addtest', [AddtestController::class, 'actionIndex']);
