@@ -4,16 +4,19 @@
         <form class="mt-8 space-y-6" @submit.prevent="submit">
             <div>
                 <mylabel for="name" value="Test name:"></mylabel>
-                <myinput id="name" type="text" class="mt-1 block w-full"/>
-            </div>
+                <myinput v-bind:value="name" @input="name = $event.target.value" id="name" type="text" class="mt-1 block w-full"/>
+            </div>                question,
+
             <div>
                 <mylabel for="description" value="Description"></mylabel>
-                <myinput id="description" type="text" class="mt-1 block w-full"/>
+                <myinput v-bind:value="description" @input="description = $event.target.value" id="description" type="text" class="mt-1 block w-full"/>
             </div>
             <div>
-                <question></question>
+                <question_c v-for="question in questions">
+                    {{question}}
+                </question_c>
             </div>
-            <mybutton class="ml-4" >Add new question</mybutton>
+            <mybutton v-on:click="add_question" class="ml-4" >Add new question</mybutton>
             <mybutton class="ml-4" >Save Test</mybutton>
         </form>
             </div>
@@ -25,11 +28,32 @@
         import mylabel from '@/Components/Label';
         import myinput from '@/Components/Input';
         import mybutton from '@/Components/Button';
-        import question from '@/Components/add_question/question.vue';
+        import question_c from '@/Components/add_question/question.vue';
         export default {
+            data(){
+              return {
+                  name: '',
+                  description:'',
+                  questions:[
+                      {id:'12323',
+                      name:'wqweqq'}
+                  ],
+              }
+
+            },
+            methods:{
+                add_question(){
+                    var new_question = {
+                        id: Date.now(),
+                        name:"question123"
+                    }
+                    this.questions.push(new_question);
+                    console.log(this.questions);
+                }
+            },
             name: "addtest",
             components: {
-                question,
+                question_c,
                 myinput,
                 mylabel,
                 mybutton,

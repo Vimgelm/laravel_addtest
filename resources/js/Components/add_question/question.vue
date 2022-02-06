@@ -1,6 +1,6 @@
 <template>
     <div>
-        <mylabel for="question" value="Question:"></mylabel>
+        <mylabel for="question" value="{{name}}"></mylabel>
         <myinput id="question" type="text" class="mt-1 block w-full"/>
     </div>
     <div class="flex items-center justify-between">
@@ -42,6 +42,9 @@
     import myinput from '@/Components/Input';
     import mycheckbox from '@/Components/Checkbox';
     export default {
+        props:{
+          name:'',
+        },
         name: "question",
         components: {
           mylabel,
