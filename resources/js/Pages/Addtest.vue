@@ -5,14 +5,17 @@
             <div>
                 <mylabel for="name" value="Test name:"></mylabel>
                 <myinput v-bind:value="name" @input="name = $event.target.value" id="name" type="text" class="mt-1 block w-full"/>
-            </div>                question,
+            </div>
 
             <div>
                 <mylabel for="description" value="Description"></mylabel>
                 <myinput v-bind:value="description" @input="description = $event.target.value" id="description" type="text" class="mt-1 block w-full"/>
             </div>
             <div>
-                <question_c v-for="question in questions">
+                <question_c  v-for="question in questions"
+                                    :key="question.id"
+                                    :question="question"
+                                    v-on:remove="remove_question">
                     {{question}}
                 </question_c>
             </div>
@@ -34,10 +37,7 @@
               return {
                   name: '',
                   description:'',
-                  questions:[
-                      {id:'12323',
-                      name:'wqweqq'}
-                  ],
+                  questions:[],
               }
 
             },
@@ -45,10 +45,13 @@
                 add_question(){
                     var new_question = {
                         id: Date.now(),
-                        name:"question123"
+                        quest_name:"question123"
                     }
                     this.questions.push(new_question);
-                    console.log(this.questions);
+                },
+                remove_question(question){
+                    console.log(question)
+                    this.questions = this.questions.filter(p => p.id!== question.id )
                 }
             },
             name: "addtest",

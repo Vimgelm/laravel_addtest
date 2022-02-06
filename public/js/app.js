@@ -19603,18 +19603,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Label__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/Label */ "./resources/js/Components/Label.vue");
 /* harmony import */ var _Components_Input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/Input */ "./resources/js/Components/Input.vue");
 /* harmony import */ var _Components_Checkbox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/Checkbox */ "./resources/js/Components/Checkbox.vue");
+/* harmony import */ var _Components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/Button */ "./resources/js/Components/Button.vue");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    name: ''
+    question: {
+      type: Object,
+      required: true
+    }
   },
+  emits: ['remove'],
   name: "question",
   components: {
     mylabel: _Components_Label__WEBPACK_IMPORTED_MODULE_0__["default"],
     myinput: _Components_Input__WEBPACK_IMPORTED_MODULE_1__["default"],
-    mycheckbox: _Components_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"]
+    mycheckbox: _Components_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"],
+    mybutton: _Components_Button__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 });
 
@@ -19709,20 +19716,22 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: '',
       description: '',
-      questions: [{
-        id: '12323',
-        name: 'wqweqq'
-      }]
+      questions: []
     };
   },
   methods: {
     add_question: function add_question() {
       var new_question = {
         id: Date.now(),
-        name: "question123"
+        quest_name: "question123"
       };
       this.questions.push(new_question);
-      console.log(this.questions);
+    },
+    remove_question: function remove_question(question) {
+      console.log(question);
+      this.questions = this.questions.filter(function (p) {
+        return p.id !== question.id;
+      });
     }
   },
   name: "addtest",
@@ -20612,16 +20621,32 @@ var _hoisted_7 = {
 var _hoisted_8 = {
   "class": "flex items-center"
 };
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Delete question");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   var _component_mylabel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("mylabel");
 
   var _component_myinput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("myinput");
 
   var _component_mycheckbox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("mycheckbox");
 
+  var _component_mybutton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("mybutton");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
     "for": "question",
-    value: "{{name}}"
+    value: ""
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.question.quest_name), 1
+      /* TEXT */
+      )];
+    }),
+    _: 1
+    /* STABLE */
+
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
     id: "question",
     type: "text",
@@ -20662,7 +20687,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "answer4",
     type: "text",
     "class": "mt-1 block w-full"
-  })])])], 64
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return _ctx.$emit('remove', _this.question);
+    })
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_9];
+    }),
+    _: 1
+    /* STABLE */
+
+  })])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -20969,11 +21005,9 @@ var _hoisted_2 = {
   "class": "max-w-md w-full space-y-8"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" question, ");
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Add new question");
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Add new question");
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Save Test");
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Save Test");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_mylabel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("mylabel");
@@ -21002,7 +21036,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mt-1 block w-full"
   }, null, 8
   /* PROPS */
-  , ["value"])]), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
+  , ["value"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
     "for": "description",
     value: "Description"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
@@ -21016,7 +21050,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["value"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.questions, function (question) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_question_c, null, {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_question_c, {
+      key: question.id,
+      question: question,
+      onRemove: $options.remove_question
+    }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(question), 1
         /* TEXT */
@@ -21025,17 +21063,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       _: 2
       /* DYNAMIC */
 
-    }, 1024
-    /* DYNAMIC_SLOTS */
-    );
-  }), 256
-  /* UNKEYED_FRAGMENT */
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["question", "onRemove"]);
+  }), 128
+  /* KEYED_FRAGMENT */
   ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
     onClick: $options.add_question,
     "class": "ml-4"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_4];
+      return [_hoisted_3];
     }),
     _: 1
     /* STABLE */
@@ -21046,7 +21084,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "ml-4"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_5];
+      return [_hoisted_4];
     }),
     _: 1
     /* STABLE */

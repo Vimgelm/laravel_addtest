@@ -1,6 +1,6 @@
 <template>
     <div>
-        <mylabel for="question" value="{{name}}"></mylabel>
+        <mylabel for="question" value="">{{question.quest_name}}</mylabel>
         <myinput id="question" type="text" class="mt-1 block w-full"/>
     </div>
     <div class="flex items-center justify-between">
@@ -30,6 +30,7 @@
         <mycheckbox name="ok"/>
         <myinput id="answer4" type="text" class="mt-1 block w-full"/>
         </div>
+        <mybutton v-on:click="$emit('remove',this.question)">Delete question</mybutton>
     </div>
 
 
@@ -41,19 +42,26 @@
     import mylabel from '@/Components/Label';
     import myinput from '@/Components/Input';
     import mycheckbox from '@/Components/Checkbox';
+    import mybutton from '@/Components/Button'
     export default {
         props:{
-          name:'',
+            question:{
+             type: Object,
+             required: true,
+            }
         },
+        emits: ['remove']
+        ,
         name: "question",
         components: {
           mylabel,
             myinput,
             mycheckbox,
+            mybutton
         },
     }
 </script>
 
-<style scoped>
+<style>
 
 </style>
