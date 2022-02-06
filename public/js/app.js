@@ -19608,6 +19608,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "question",
+  props: ['id', 'name'],
   components: {
     mylabel: _Components_Label__WEBPACK_IMPORTED_MODULE_0__["default"],
     myinput: _Components_Input__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -19702,6 +19703,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      questions: [{
+        id: '1',
+        name: 'asdfas'
+      }, {
+        id: '2',
+        name: 'asddasa'
+      }]
+    };
+  },
+  methods: {
+    add_question: function add_question() {
+      this.questions.push = {
+        id: '23',
+        name: '123asds'
+      };
+      console.log(this.questions);
+    }
+  },
   name: "addtest",
   components: {
     question: _Components_add_question_question_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -20609,7 +20630,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
-    id: "answer1",
+    id: "answer_1",
     type: "text",
     "class": "mt-1 block w-full"
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
@@ -20618,7 +20639,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
-    id: "answer2",
+    id: "answer_2",
     type: "text",
     "class": "mt-1 block w-full"
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
@@ -20627,7 +20648,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
-    id: "answer",
+    id: "answer_3",
     type: "text",
     "class": "mt-1 block w-full"
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
@@ -20636,7 +20657,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
-    id: "answer4",
+    id: "answer_4",
     type: "text",
     "class": "mt-1 block w-full"
   })])])], 64
@@ -20978,7 +20999,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "description",
     type: "text",
     "class": "mt-1 block w-full"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_question)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
+  })]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.questions, function (quest) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_question, (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeProps)((0,vue__WEBPACK_IMPORTED_MODULE_0__.guardReactiveProps)($data.questions)), {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(quest), 1
+        /* TEXT */
+        )];
+      }),
+      _: 2
+      /* DYNAMIC */
+
+    }, 1040
+    /* FULL_PROPS, DYNAMIC_SLOTS */
+    );
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
+    onClick: $options.add_question,
     "class": "ml-4"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -20987,7 +21024,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
+  }, 8
+  /* PROPS */
+  , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
     "class": "ml-4"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {

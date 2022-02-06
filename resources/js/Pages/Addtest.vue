@@ -10,10 +10,10 @@
                 <mylabel for="description" value="Description"></mylabel>
                 <myinput id="description" type="text" class="mt-1 block w-full"/>
             </div>
-            <div>
-                <question></question>
-            </div>
-            <mybutton class="ml-4" >Add new question</mybutton>
+            <question v-for="quest in questions" v-bind="questions">
+                {{quest}}
+            </question>
+            <mybutton v-on:click="add_question" class="ml-4" >Add new question</mybutton>
             <mybutton class="ml-4" >Save Test</mybutton>
         </form>
             </div>
@@ -27,6 +27,25 @@
         import mybutton from '@/Components/Button';
         import question from '@/Components/add_question/question.vue';
         export default {
+            data(){
+              return {
+                  questions: [
+                      {id:'1',name:'asdfas'},
+                      {id:'2', name: 'asddasa'}
+                  ]
+
+              }
+            },
+            methods:{
+                add_question(){
+                    this.questions.push ={
+                        id: '23',
+                        name:'123asds',
+                    }
+                    console.log(this.questions);
+
+                }
+            },
             name: "addtest",
             components: {
                 question,
