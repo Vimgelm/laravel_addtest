@@ -19603,16 +19603,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Label__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/Label */ "./resources/js/Components/Label.vue");
 /* harmony import */ var _Components_Input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/Input */ "./resources/js/Components/Input.vue");
 /* harmony import */ var _Components_Checkbox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/Checkbox */ "./resources/js/Components/Checkbox.vue");
+/* harmony import */ var _Components_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/Button */ "./resources/js/Components/Button.vue");
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      question_value: ''
+    };
+  },
+  props: {
+    question: {
+      type: Object,
+      required: true
+    }
+  },
+  emits: ['remove', 'add'],
+  methods: {
+    addvalue: function addvalue(value, el_id) {
+      this.$emit('add', value, el_id, this.question);
+    }
+  },
   name: "question",
-  props: ['id', 'name'],
   components: {
     mylabel: _Components_Label__WEBPACK_IMPORTED_MODULE_0__["default"],
     myinput: _Components_Input__WEBPACK_IMPORTED_MODULE_1__["default"],
-    mycheckbox: _Components_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"]
+    mycheckbox: _Components_Checkbox__WEBPACK_IMPORTED_MODULE_2__["default"],
+    mybutton: _Components_Button__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 });
 
@@ -19703,29 +19722,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "addtest",
   data: function data() {
     return {
-      questions: [{
-        id: '1',
-        name: 'asdfas'
-      }, {
-        id: '2',
-        name: 'asddasa'
-      }]
+      name: '',
+      description: '',
+      questions: []
     };
   },
   methods: {
     add_question: function add_question() {
-      this.questions.push = {
-        id: '23',
-        name: '123asds'
+      var new_question = {
+        id: Date.now(),
+        quest_name: "question123"
       };
-      console.log(this.questions);
+      this.questions.push(new_question);
+    },
+    remove_question: function remove_question(question) {
+      this.questions = this.questions.filter(function (p) {
+        return p.id !== question.id;
+      });
+      console.log(question.id);
+    },
+    getquestion: function getquestion(value, el_id, question) {
+      this.questions.forEach(function (question_el, i, questions) {
+        if (question_el.id == question.id) {
+          question_el[el_id] = value;
+        }
+      });
     }
   },
-  name: "addtest",
   components: {
-    question: _Components_add_question_question_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    question_c: _Components_add_question_question_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     myinput: _Components_Input__WEBPACK_IMPORTED_MODULE_1__["default"],
     mylabel: _Components_Label__WEBPACK_IMPORTED_MODULE_0__["default"],
     mybutton: _Components_Button__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -20610,17 +20638,36 @@ var _hoisted_7 = {
 var _hoisted_8 = {
   "class": "flex items-center"
 };
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Delete question");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   var _component_mylabel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("mylabel");
 
   var _component_myinput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("myinput");
 
   var _component_mycheckbox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("mycheckbox");
 
+  var _component_mybutton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("mybutton");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
     "for": "question",
-    value: "Question:"
+    value: "Question"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.question.quest_name), 1
+      /* TEXT */
+      )];
+    }),
+    _: 1
+    /* STABLE */
+
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
+    onInput: _cache[0] || (_cache[0] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
     id: "question",
     type: "text",
     "class": "mt-1 block w-full"
@@ -20630,7 +20677,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
-    id: "answer_1",
+    onInput: _cache[1] || (_cache[1] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
+    id: "answer1",
     type: "text",
     "class": "mt-1 block w-full"
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
@@ -20639,7 +20689,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
-    id: "answer_2",
+    onInput: _cache[2] || (_cache[2] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
+    id: "answer2",
     type: "text",
     "class": "mt-1 block w-full"
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
@@ -20648,7 +20701,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
-    id: "answer_3",
+    onInput: _cache[3] || (_cache[3] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
+    id: "answer",
     type: "text",
     "class": "mt-1 block w-full"
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
@@ -20657,10 +20713,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
-    id: "answer_4",
+    onInput: _cache[4] || (_cache[4] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
+    id: "answer4",
     type: "text",
     "class": "mt-1 block w-full"
-  })])])], 64
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
+    onClick: _cache[5] || (_cache[5] = function ($event) {
+      return _ctx.$emit('remove', _this.question);
+    })
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_9];
+    }),
+    _: 1
+    /* STABLE */
+
+  })])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -20976,45 +21046,62 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_myinput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("myinput");
 
-  var _component_question = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("question");
+  var _component_question_c = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("question_c");
 
   var _component_mybutton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("mybutton");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "mt-8 space-y-6",
-    onSubmit: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return _ctx.submit && _ctx.submit.apply(_ctx, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
     "for": "name",
     value: "Test name:"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
+    value: $data.name,
+    onInput: _cache[0] || (_cache[0] = function ($event) {
+      return $data.name = $event.target.value;
+    }),
     id: "name",
     type: "text",
     "class": "mt-1 block w-full"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
+  }, null, 8
+  /* PROPS */
+  , ["value"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
     "for": "description",
     value: "Description"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
+    value: $data.description,
+    onInput: _cache[1] || (_cache[1] = function ($event) {
+      return $data.description = $event.target.value;
+    }),
     id: "description",
     type: "text",
     "class": "mt-1 block w-full"
-  })]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.questions, function (quest) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_question, (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeProps)((0,vue__WEBPACK_IMPORTED_MODULE_0__.guardReactiveProps)($data.questions)), {
+  }, null, 8
+  /* PROPS */
+  , ["value"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.questions, function (question) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_question_c, {
+      key: question.id,
+      question: question,
+      onRemove: $options.remove_question,
+      onAdd: $options.getquestion
+    }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(quest), 1
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(question), 1
         /* TEXT */
         )];
       }),
       _: 2
       /* DYNAMIC */
 
-    }, 1040
-    /* FULL_PROPS, DYNAMIC_SLOTS */
-    );
-  }), 256
-  /* UNKEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["question", "onRemove", "onAdd"]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
     onClick: $options.add_question,
     "class": "ml-4"
   }, {
