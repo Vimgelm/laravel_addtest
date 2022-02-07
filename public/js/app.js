@@ -19609,6 +19609,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      question_value: ''
+    };
+  },
   props: {
     question: {
       type: Object,
@@ -19616,6 +19621,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   emits: ['remove'],
+  methods: {
+    addvalue: function addvalue(value, id) {
+      this.$emit('add', value, id, this.question);
+    }
+  },
   name: "question",
   components: {
     mylabel: _Components_Label__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -19728,10 +19738,13 @@ __webpack_require__.r(__webpack_exports__);
       this.questions.push(new_question);
     },
     remove_question: function remove_question(question) {
-      console.log(question);
       this.questions = this.questions.filter(function (p) {
         return p.id !== question.id;
       });
+      console.log(question.id);
+    },
+    getquestion: function getquestion(value, id, question) {
+      console.log(question.id);
     }
   },
   name: "addtest",
@@ -20637,7 +20650,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
     "for": "question",
-    value: ""
+    value: "Question"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.question.quest_name), 1
@@ -20648,6 +20661,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
+    onInput: _cache[0] || (_cache[0] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
     id: "question",
     type: "text",
     "class": "mt-1 block w-full"
@@ -20657,6 +20673,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
+    onInput: _cache[1] || (_cache[1] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
     id: "answer1",
     type: "text",
     "class": "mt-1 block w-full"
@@ -20666,6 +20685,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
+    onInput: _cache[2] || (_cache[2] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
     id: "answer2",
     type: "text",
     "class": "mt-1 block w-full"
@@ -20675,6 +20697,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
+    onInput: _cache[3] || (_cache[3] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
     id: "answer",
     type: "text",
     "class": "mt-1 block w-full"
@@ -20684,11 +20709,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
     name: "ok"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
+    onInput: _cache[4] || (_cache[4] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
     id: "answer4",
     type: "text",
     "class": "mt-1 block w-full"
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
-    onClick: _cache[0] || (_cache[0] = function ($event) {
+    onClick: _cache[5] || (_cache[5] = function ($event) {
       return _ctx.$emit('remove', _this.question);
     })
   }, {
@@ -21053,7 +21081,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_question_c, {
       key: question.id,
       question: question,
-      onRemove: $options.remove_question
+      onRemove: $options.remove_question,
+      onAdd: $options.getquestion
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(question), 1
@@ -21065,7 +21094,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     }, 1032
     /* PROPS, DYNAMIC_SLOTS */
-    , ["question", "onRemove"]);
+    , ["question", "onRemove", "onAdd"]);
   }), 128
   /* KEYED_FRAGMENT */
   ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {

@@ -15,7 +15,8 @@
                 <question_c  v-for="question in questions"
                                     :key="question.id"
                                     :question="question"
-                                    v-on:remove="remove_question">
+                                    v-on:remove="remove_question"
+                                    v-on:add = "getquestion">
                     {{question}}
                 </question_c>
             </div>
@@ -50,9 +51,13 @@
                     this.questions.push(new_question);
                 },
                 remove_question(question){
-                    console.log(question)
                     this.questions = this.questions.filter(p => p.id!== question.id )
-                }
+                    console.log(question.id);
+                },
+                getquestion(value,id,question){
+                    console.log(question.id);
+
+                },
             },
             name: "addtest",
             components: {
