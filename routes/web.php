@@ -36,3 +36,4 @@ Route::get('test',function (){
 });
 
 Route::get('addtest', [AddtestController::class, 'actionIndex']);
+Route::get('result', [AddtestController::class, 'getResult']);

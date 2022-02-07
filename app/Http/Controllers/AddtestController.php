@@ -9,4 +9,8 @@ class AddtestController extends Controller
     public function actionIndex(){
         return view('addtest');
     }
+
+    public function getResult() {
+        return view('test');
+    }
 }

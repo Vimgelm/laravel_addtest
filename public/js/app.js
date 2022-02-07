@@ -19744,6 +19744,7 @@ __webpack_require__.r(__webpack_exports__);
       });
       console.log(question.id);
     },
+    //добавляет данные ввода отдельного input
     getquestion: function getquestion(value, el_id, question) {
       this.questions.forEach(function (question_el, i, questions) {
         if (question_el.id == question.id) {
@@ -20675,9 +20676,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "for": "answer1",
     value: "Answer A:"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
-    name: "ok"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
     onInput: _cache[1] || (_cache[1] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
+    name: "ok",
+    id: "check_1"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
+    onInput: _cache[2] || (_cache[2] = function ($event) {
       return $options.addvalue($event.target.value, $event.target.id);
     }),
     id: "answer1",
@@ -20687,9 +20692,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "for": "answer2",
     value: "Answer B:"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
-    name: "ok"
+    onInput: _cache[3] || (_cache[3] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
+    name: "ok",
+    id: "check_2"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
-    onInput: _cache[2] || (_cache[2] = function ($event) {
+    onInput: _cache[4] || (_cache[4] = function ($event) {
       return $options.addvalue($event.target.value, $event.target.id);
     }),
     id: "answer2",
@@ -20699,28 +20708,36 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "for": "answer3",
     value: "Answer C:"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
-    name: "ok"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
-    onInput: _cache[3] || (_cache[3] = function ($event) {
+    onInput: _cache[5] || (_cache[5] = function ($event) {
       return $options.addvalue($event.target.value, $event.target.id);
     }),
-    id: "answer",
+    name: "ok",
+    id: "check_3"
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
+    onInput: _cache[6] || (_cache[6] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
+    id: "answer3",
     type: "text",
     "class": "mt-1 block w-full"
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mylabel, {
     "for": "answer4",
     value: "Answer D:"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mycheckbox, {
-    name: "ok"
+    onInput: _cache[7] || (_cache[7] = function ($event) {
+      return $options.addvalue($event.target.value, $event.target.id);
+    }),
+    name: "ok",
+    id: "check_4"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_myinput, {
-    onInput: _cache[4] || (_cache[4] = function ($event) {
+    onInput: _cache[8] || (_cache[8] = function ($event) {
       return $options.addvalue($event.target.value, $event.target.id);
     }),
     id: "answer4",
     type: "text",
     "class": "mt-1 block w-full"
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
-    onClick: _cache[5] || (_cache[5] = function ($event) {
+    onClick: _cache[9] || (_cache[9] = function ($event) {
       return _ctx.$emit('remove', _this.question);
     })
   }, {
@@ -21052,6 +21069,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "mt-8 space-y-6",
+    action: "/result/",
+    method: "post",
     onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return _ctx.submit && _ctx.submit.apply(_ctx, arguments);
     }, ["prevent"]))

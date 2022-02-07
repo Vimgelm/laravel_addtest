@@ -1,7 +1,7 @@
     <template>
         <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div class="max-w-md w-full space-y-8">
-        <form class="mt-8 space-y-6" @submit.prevent="submit">
+        <form class="mt-8 space-y-6" action="/result/" method="post"  @submit.prevent="submit">
             <div>
                 <mylabel for="name" value="Test name:"></mylabel>
                 <myinput v-bind:value="name"
@@ -61,6 +61,7 @@
                     this.questions = this.questions.filter(p => p.id!== question.id )
                     console.log(question.id);
                 },
+                //добавляет данные ввода отдельного input
                 getquestion(value,el_id,question){
                     this.questions.forEach(function(question_el,i,questions){
                         if (question_el.id == question.id){
