@@ -41,49 +41,54 @@
         import mybutton from '@/Components/Button';
         import question_c from '@/Components/add_question/question.vue';
         import axios from 'axios';
+        import question from "@/Components/add_question/question";
         export default {
             name: "addtest",
             data(){
               return {
                   name:'',
                   description:'',
-                  questions:[],
-                  questions_obj:{},
+                  questions:{},
               }
             },
             methods:{
                 add_question(){
+                    var id = Date.now();
                     var new_question = {
-                        id: Date.now(),
+                        id: id,
                         quest_name:"question123"
                     };
-                    this.questions.push(new_question);
+                    this.questions[id] = new_question;
                 },
                 //удаляет вопрос
                 remove_question(question){
-                    this.questions = this.questions.filter(p => p.id!== question.id );
+                    for (var key in this.questions){
+                        if(this.questions[key]['id'] == question.id){
+                            delete this.questions[key];
+                        }
+                    }
+                    // this.questions = this.questions.filter(p => p.id!== question.id );
                 },
                 //добавляет данные ввода отдельного input
                 getquestion(value,el_id,question){
-                    this.questions.forEach(function(question_el,i,questions){
-                        if (question_el.id == question.id){
-                question_el[el_id] = value;
+                    for(var key in this.questions){
+                        if (this.questions[key]['id'] == question.id){
+                            this.questions[key][el_id] = value;
                         }
-                    });
+                    };
                 },
                 //отправляем данные формы через axios
                 send_form() {
-                    this.questions_obj = Object.fromEntries(this.questions); //из обьекта в массив
-                    this.questions_obj.name = this.name;
-                    this.questions_obj.description = this.description;
-                    this.questions_obj.owner = 'vim';
-
+                    console.log(this.questions);
+                    this.questions.name = this.name;
+                    this.questions.description = this.description;
+                    this.questions.owner = 'vim';
 
                     axios({
                         method:'post',
                         url:'result/',
                         params:{},
-                        data:this.questions_obj,
+                        data:this.questions,
                     })
                     .then(function(response) {
                     console.log(response);
