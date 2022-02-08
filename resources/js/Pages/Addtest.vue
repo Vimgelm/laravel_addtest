@@ -48,6 +48,7 @@
                   name:'',
                   description:'',
                   questions:[],
+                  questions_obj:{},
               }
             },
             methods:{
@@ -55,9 +56,10 @@
                     var new_question = {
                         id: Date.now(),
                         quest_name:"question123"
-                    }
+                    };
                     this.questions.push(new_question);
                 },
+                //удаляет вопрос
                 remove_question(question){
                     this.questions = this.questions.filter(p => p.id!== question.id );
                 },
@@ -71,11 +73,17 @@
                 },
                 //отправляем данные формы через axios
                 send_form() {
+                    this.questions_obj = Object.fromEntries(this.questions); //из обьекта в массив
+                    this.questions_obj.name = this.name;
+                    this.questions_obj.description = this.description;
+                    this.questions_obj.owner = 'vim';
+
+
                     axios({
                         method:'post',
                         url:'result/',
                         params:{},
-                        data:this.questions,
+                        data:this.questions_obj,
                     })
                     .then(function(response) {
                     console.log(response);
