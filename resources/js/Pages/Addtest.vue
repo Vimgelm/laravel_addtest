@@ -28,7 +28,7 @@
                 </question_c>
             </div>
             <mybutton v-on:click="add_question" class="ml-4" >Add new question</mybutton>
-            <mybutton class="ml-4" >Save Test</mybutton>
+            <mybutton v-on:click="phpsend_form" class="ml-4" >Save Test</mybutton>
         </form>
             </div>
         </div>
@@ -40,6 +40,7 @@
         import myinput from '@/Components/Input';
         import mybutton from '@/Components/Button';
         import question_c from '@/Components/add_question/question.vue';
+        import axios from 'axios';
         export default {
             name: "addtest",
             data(){
@@ -66,15 +67,27 @@
                     this.questions.forEach(function(question_el,i,questions){
                         if (question_el.id == question.id){
                 question_el[el_id] = value;
-            }
+                        }
                     });
                 },
+                //отправляем данные формы через axios
+                send_form() {
+                    axios.post('result/', {name:'jonh', id: '1000'})
+                    .then(function(response) {
+                    console.log(response);
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+                }
+
             },
             components: {
                 question_c,
                 myinput,
                 mylabel,
                 mybutton,
+                axios,
             },
         }
     </script>

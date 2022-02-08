@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\AddtestController;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,5 +35,5 @@ Route::get('test',function (){
     return view('test');
 });
 
-Route::get('addtest', [AddtestController::class, 'actionIndex']);
-Route::get('result', [AddtestController::class, 'getResult']);
+Route::get('createtest', [TestController::class, 'actionIndex']);
+Route::post('test', [TestController::class, 'getTest']);
