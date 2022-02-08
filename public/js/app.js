@@ -19745,7 +19745,6 @@ __webpack_require__.r(__webpack_exports__);
       this.questions = this.questions.filter(function (p) {
         return p.id !== question.id;
       });
-      console.log(question.id);
     },
     //добавляет данные ввода отдельного input
     getquestion: function getquestion(value, el_id, question) {
@@ -19757,9 +19756,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     //отправляем данные формы через axios
     send_form: function send_form() {
-      axios__WEBPACK_IMPORTED_MODULE_4___default().post('result/', {
-        name: 'jonh',
-        id: '1000'
+      axios__WEBPACK_IMPORTED_MODULE_4___default()({
+        method: 'post',
+        url: 'result/',
+        params: {},
+        data: this.questions
       }).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
@@ -21084,8 +21085,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "mt-8 space-y-6",
-    action: "/result/",
-    method: "post",
     onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return _ctx.submit && _ctx.submit.apply(_ctx, arguments);
     }, ["prevent"]))

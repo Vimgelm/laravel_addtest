@@ -1,7 +1,7 @@
     <template>
         <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div class="max-w-md w-full space-y-8">
-        <form class="mt-8 space-y-6" action="/result/" method="post"  @submit.prevent="submit">
+        <form class="mt-8 space-y-6" @submit.prevent="submit">
             <div>
                 <mylabel for="name" value="Test name:"></mylabel>
                 <myinput v-bind:value="name"
@@ -28,7 +28,7 @@
                 </question_c>
             </div>
             <mybutton v-on:click="add_question" class="ml-4" >Add new question</mybutton>
-            <mybutton v-on:click="phpsend_form" class="ml-4" >Save Test</mybutton>
+            <mybutton v-on:click="send_form" class="ml-4" >Save Test</mybutton>
         </form>
             </div>
         </div>
@@ -45,7 +45,7 @@
             name: "addtest",
             data(){
               return {
-                  name: '',
+                  name:'',
                   description:'',
                   questions:[],
               }
@@ -59,8 +59,7 @@
                     this.questions.push(new_question);
                 },
                 remove_question(question){
-                    this.questions = this.questions.filter(p => p.id!== question.id )
-                    console.log(question.id);
+                    this.questions = this.questions.filter(p => p.id!== question.id );
                 },
                 //добавляет данные ввода отдельного input
                 getquestion(value,el_id,question){
@@ -68,11 +67,18 @@
                         if (question_el.id == question.id){
                 question_el[el_id] = value;
                         }
+
+
                     });
                 },
                 //отправляем данные формы через axios
                 send_form() {
-                    axios.post('result/', {name:'jonh', id: '1000'})
+                    axios({
+                        method:'post',
+                        url:'result/',
+                        params:{},
+                        data:this.questions,
+                    })
                     .then(function(response) {
                     console.log(response);
                     })

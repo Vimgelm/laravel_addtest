@@ -37,3 +37,4 @@ Route::get('test',function (){
 
 Route::get('createtest', [TestController::class, 'actionIndex']);
 Route::post('test', [TestController::class, 'getTest']);
+Route::post('result', [TestController::class, 'Result']);
