@@ -21148,6 +21148,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mybutton, {
     onClick: $options.send_form,
+    onAdd: $options.getquestion,
     "class": "ml-4"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -21158,7 +21159,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["onClick"])], 32
+  , ["onClick", "onAdd"])], 32
   /* HYDRATE_EVENTS */
   )])]);
 }

@@ -28,7 +28,7 @@
                 </question_c>
             </div>
             <mybutton v-on:click="add_question" class="ml-4" >Add new question</mybutton>
-            <mybutton v-on:click="send_form" class="ml-4" >Save Test</mybutton>
+            <mybutton v-on:click="send_form" v-on:add = "getquestion" class="ml-4" >Save Test</mybutton>
         </form>
             </div>
         </div>
@@ -67,8 +67,6 @@
                         if (question_el.id == question.id){
                 question_el[el_id] = value;
                         }
-
-
                     });
                 },
                 //отправляем данные формы через axios
