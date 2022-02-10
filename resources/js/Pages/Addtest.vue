@@ -1,6 +1,7 @@
     <template>
         <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div class="max-w-md w-full space-y-8">
+                <div class="p-error" v-for="error in errors">{{error[0]}}</div>
         <form class="mt-8 space-y-6" @submit.prevent="submit">
             <div>
                 <mylabel for="name" value="Test name:"></mylabel>
@@ -20,7 +21,7 @@
                          class="mt-1 block w-full"/>
             </div>
             <div>
-                <question_c  v-for="question in questions"
+                <question_c  v-for="question in test.questions"
                                     :key="question.id"
                                     :question="question"
                                     v-on:remove="remove_question"
@@ -48,7 +49,9 @@
               return {
                   name:'',
                   description:'',
-                  questions:{},
+                  questions_count:0,
+                  test:{questions:{}},
+                  errors: null,
               }
             },
             methods:{
@@ -58,35 +61,35 @@
                         id: id,
                         quest_name:"question123"
                     };
-                    this.questions[id] = new_question;
+                        this.test.questions[this.questions_count] = new_question;
+                    this.questions_count += 1;
                 },
                 //удаляет вопрос
                 remove_question(question){
-                    for (var key in this.questions){
-                        if(this.questions[key]['id'] == question.id){
-                            delete this.questions[key];
+                    for (var key in this.test.questions){
+                        if(this.test.questions[key].id == question.id){
+                            delete this.test.questions[key];
                         }
                     }
-                    // this.questions = this.questions.filter(p => p.id!== question.id );
                 },
                 //добавляет данные ввода отдельного input
                 getquestion(value,el_id,question){
-                    for(var key in this.questions){
-                        if (this.questions[key]['id'] == question.id){
-                            this.questions[key][el_id] = value;
+                    for(var key in this.test.questions){
+                        if (this.test.questions[key]['id'] == question.id){
+                            this.test.questions[key][el_id] = value;
                         }
                     };
                 },
                 //отправляем данные формы через axios
                 send_form() {
-                    console.log(this.questions);
-                    this.questions.name = this.name;
-                    this.questions.description = this.description;
-                    this.questions.owner = 'vim';
+                    var that = this; //какойто костыль
+                    this.test.name = this.name;
+                    this.test.description = this.description;
+                    this.test.owner = 'vim'; //заглушка
 
                     axios({
                         method:'post',
-                        url:'result/',
+                        url:'store/',
                         params:{},
                         data:this.questions,
                     })
@@ -94,7 +97,8 @@
                     console.log(response);
                     })
                     .catch(function(error){
-                        console.log(error);
+                         that.errors = error.response.data.errors //возращает массив ошибок
+                        console.log(error.response.data.errors);
                     })
                 }
 

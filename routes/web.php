@@ -35,6 +35,6 @@ Route::get('test',function (){
     return view('test');
 });
 
-Route::get('createtest', [TestController::class, 'actionIndex']);
+Route::get('test/create/', [TestController::class, 'actionIndex']);
 Route::post('test', [TestController::class, 'getTest']);
-Route::post('result', [TestController::class, 'Result']);
+Route::post('test/store', [TestController::class, 'Store']);

@@ -19731,7 +19731,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: '',
       description: '',
-      questions: {}
+      questions_count: 0,
+      test: {
+        questions: {}
+      },
+      errors: null
     };
   },
   methods: {
@@ -19741,22 +19745,22 @@ __webpack_require__.r(__webpack_exports__);
         id: id,
         quest_name: "question123"
       };
-      this.questions[id] = new_question;
+      this.test.questions[this.questions_count] = new_question;
+      this.questions_count += 1;
     },
     //удаляет вопрос
     remove_question: function remove_question(question) {
-      for (var key in this.questions) {
-        if (this.questions[key]['id'] == question.id) {
-          delete this.questions[key];
+      for (var key in this.test.questions) {
+        if (this.test.questions[key].id == question.id) {
+          delete this.test.questions[key];
         }
-      } // this.questions = this.questions.filter(p => p.id!== question.id );
-
+      }
     },
     //добавляет данные ввода отдельного input
     getquestion: function getquestion(value, el_id, question) {
-      for (var key in this.questions) {
-        if (this.questions[key]['id'] == question.id) {
-          this.questions[key][el_id] = value;
+      for (var key in this.test.questions) {
+        if (this.test.questions[key]['id'] == question.id) {
+          this.test.questions[key][el_id] = value;
         }
       }
 
@@ -19764,19 +19768,23 @@ __webpack_require__.r(__webpack_exports__);
     },
     //отправляем данные формы через axios
     send_form: function send_form() {
-      console.log(this.questions);
-      this.questions.name = this.name;
-      this.questions.description = this.description;
-      this.questions.owner = 'vim';
+      var that = this; //какойто костыль
+
+      this.test.name = this.name;
+      this.test.description = this.description;
+      this.test.owner = 'vim'; //заглушка
+
       axios__WEBPACK_IMPORTED_MODULE_4___default()({
         method: 'post',
-        url: 'result/',
+        url: 'store/',
         params: {},
         data: this.questions
       }).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
-        console.log(error);
+        that.errors = error.response.data.errors; //возращает массив ошибок
+
+        console.log(error.response.data.errors);
       });
     }
   },
@@ -21081,10 +21089,13 @@ var _hoisted_1 = {
 var _hoisted_2 = {
   "class": "max-w-md w-full space-y-8"
 };
+var _hoisted_3 = {
+  "class": "p-error"
+};
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Add new question");
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Add new question");
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Save Test");
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Save Test");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_mylabel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("mylabel");
@@ -21095,7 +21106,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_mybutton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("mybutton");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.errors, function (error) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[0]), 1
+    /* TEXT */
+    );
+  }), 256
+  /* UNKEYED_FRAGMENT */
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": "mt-8 space-y-6",
     onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return _ctx.submit && _ctx.submit.apply(_ctx, arguments);
@@ -21126,7 +21143,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "mt-1 block w-full"
   }, null, 8
   /* PROPS */
-  , ["value"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.questions, function (question) {
+  , ["value"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.test.questions, function (question) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_question_c, {
       key: question.id,
       question: question,
@@ -21151,7 +21168,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "ml-4"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_3];
+      return [_hoisted_4];
     }),
     _: 1
     /* STABLE */
@@ -21164,7 +21181,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "ml-4"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_4];
+      return [_hoisted_5];
     }),
     _: 1
     /* STABLE */

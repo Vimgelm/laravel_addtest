@@ -22,6 +22,10 @@ class CreateQuestionsTable extends Migration
             $table-> string('answer2');
             $table-> string('answer3');
             $table-> string('answer4');
+            $table-> boolean('check1');
+            $table-> boolean('check2');
+            $table-> boolean('check3');
+            $table-> boolean('check4');
         });
     }
 
