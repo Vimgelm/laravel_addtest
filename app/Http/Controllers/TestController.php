@@ -11,8 +11,11 @@ class TestController extends Controller
     public function actionIndex(){
         return view('createtest');
     }
+    public function passTest(Request $request){
+        return view('passtest');
+    }
 
-    public function Store(Request $request){
+    public function storeTest(Request $request){
 //validation request data:
         $test = New Test();//model for tests
         $questions = New Question(); //model for tests questions

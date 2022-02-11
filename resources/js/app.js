@@ -22,6 +22,7 @@ InertiaProgress.init({ color: '#4B5563' });
 //vue component
 import HelloWorld from './Components/HelloWorld.vue';
 import Addtest from './Pages/Addtest';
+import Passtest from './Pages/Passtest';
 //prime vue component
 import App from './App.vue';
 import PrimeVue from 'primevue/config';
@@ -32,6 +33,7 @@ const app = createApp({App});
 app.component('addtest', Addtest);
 app.component('hello-world', HelloWorld);
 app.component('Chips',Chips);
+app.component('passtest', Passtest);
 
 // mount the app to the DOM
 app.mount('#app');
