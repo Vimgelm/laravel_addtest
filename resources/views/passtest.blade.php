@@ -10,7 +10,9 @@
 <body>
 <h2>passtest.blade.php</h2>
 <div id="app">
-<passtest>
+<passtest :data_questions='{!! json_encode($data_questions) !!}'
+          :data_title='{!! json_encode($data_title) !!}'
+>
 
 </passtest>
 </div>

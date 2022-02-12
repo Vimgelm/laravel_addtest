@@ -40,9 +40,9 @@
         import mylabel from '@/Components/Label';
         import myinput from '@/Components/Input';
         import mybutton from '@/Components/Button';
-        import question_c from '@/Components/add_question/question.vue';
+        import question_c from '@/Components/test/question.vue';
         import axios from 'axios';
-        import question from "@/Components/add_question/question";
+        import question from "@/Components/test/question";
         export default {
             name: "addtest",
             data(){
@@ -93,13 +93,13 @@
                         params:{},
                         data:this.questions,
                     })
-                    .then(function(response) {
-                    console.log(response);
-                    })
-                    .catch(function(error){
-                         that.errors = error.response.data.errors //возращает массив ошибок
-                        console.log(error.response.data.errors);
-                    })
+                        .then(function(response) {
+                            console.log(response);
+                        })
+                        .catch(function(error){
+                            that.errors = error.response.data.errors //возращает массив ошибок
+                            console.log(error.response.data.errors);
+                        })
                 }
 
             },
