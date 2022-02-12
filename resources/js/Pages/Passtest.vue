@@ -7,37 +7,28 @@
                         <div class="md:grid md:grid-cols-3 md:gap-6">
                             <div class="mt-5 md:mt-0 md:col-span-2">
                                 <form action="#" method="POST">
-                                    <div class="shadow overflow-hidden sm:rounded-md">
-                                        <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
-                                            <fieldset>
-                                                <legend class="text-base font-medium text-gray-900">
-                                                    {{data_title[0]['name']}}
-                                                </legend>
-                                                <legend class="text-base font-medium text-gray-900">
-                                                    {{data_title[0]['description']}}
-                                                </legend>
-                                                <div class="mt-4 space-y-4">
-                                                    <passquestions v-for="question in data_questions"
-                                                                   :key="question.id"
-                                                                   :question="question.question"
-                                                                   :answer1="question.answer1"
-                                                                   :answer2="question.answer2"
-                                                                   :answer3="question.answer3"
-                                                                   :answer4="question.answer4"
-                                                    >
-
-                                                    </passquestions>
-                                                </div>
-                                            </fieldset>
-                                        </div>
+                                    <legend class="text-base font-medium text-gray-900">
+                                        {{data_title[0]['name']}}
+                                    </legend>
+                                    <legend class="text-base font-medium text-gray-900">
+                                        {{data_title[0]['description']}}
+                                    </legend>
+                                    <div class="mt-4 space-y-4">
+                                        <passquestions v-for="question in data_questions"
+                                                       :key="question.id"
+                                                       :question="question.question"
+                                                       :answer1="question.answer1"
+                                                       :answer2="question.answer2"
+                                                       :answer3="question.answer3"
+                                                       :answer4="question.answer4"
+                                        >
+                                        </passquestions>
+                                    </div>
+                                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                        <button v-on:get_question="send_answer"></button>
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                    </div>
-                    <div class="hidden sm:block" aria-hidden="true">
-                        <div class="py-5">
-                            <div class="border-t border-gray-200"></div>
                         </div>
                     </div>
                 </div>
@@ -56,18 +47,18 @@
             return {
                 name: '',
                 description: '',
+                answers: {},
             }
         },
         props: ['data_title',
             'data_questions'],
         methods: {
-            getData() {
+            send_answer(value,id,question) {
+
                 axios({
-                    method: 'get',
+                    method: 'post',
                     url: 'pass/',
-                    params: {
-                        ID: 12345
-                    },
+                    params: {},
                     data: '',
                 })
                     .then(function (response) {
