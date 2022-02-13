@@ -39,7 +39,8 @@
 
 <script>
     import axios from "axios";
-    import passquestions from '@/Components/test/passquestions'
+    import passquestions from '@/Components/test/passquestions';
+    import authenticated from '@/Layouts/Authenticated'
 
     export default {
         name: "Passtest",
@@ -71,7 +72,8 @@
         },
         components: {
             axios,
-            passquestions
+            passquestions,
+            authenticated
         }
 
     }

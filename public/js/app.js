@@ -20204,6 +20204,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Components_test_passquestions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/test/passquestions */ "./resources/js/Components/test/passquestions.vue");
+/* harmony import */ var _Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Layouts/Authenticated */ "./resources/js/Layouts/Authenticated.vue");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -20232,7 +20234,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     axios: (axios__WEBPACK_IMPORTED_MODULE_0___default()),
-    passquestions: _Components_test_passquestions__WEBPACK_IMPORTED_MODULE_1__["default"]
+    passquestions: _Components_test_passquestions__WEBPACK_IMPORTED_MODULE_1__["default"],
+    authenticated: _Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
