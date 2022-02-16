@@ -6,7 +6,7 @@
                     <div class="mt-10 sm:mt-0">
                         <div class="md:grid md:grid-cols-3 md:gap-6">
                             <div class="mt-5 md:mt-0 md:col-span-2">
-                                <form action="#" method="POST">
+                                <form action="#" @submit.prevent="submit">
                                     <legend class="text-base font-medium text-gray-900">
                                         {{data_title[0]['name']}}
                                     </legend>
@@ -14,18 +14,24 @@
                                         {{data_title[0]['description']}}
                                     </legend>
                                     <div class="mt-4 space-y-4">
-                                        <passquestions v-for="question in data_questions"
-                                                       :key="question.id"
-                                                       :question="question.question"
-                                                       :answer1="question.answer1"
-                                                       :answer2="question.answer2"
-                                                       :answer3="question.answer3"
-                                                       :answer4="question.answer4"
+                                        <passquestions v-on:getcheck="getAnswer"
+                                                       v-for="(questions, index) in data_questions"
+                                                       :key="index"
+                                                       :index="index"
+                                                       :question="questions.question"
+                                                       :answer1="questions.answer1"
+                                                       :answer2="questions.answer2"
+                                                       :answer3="questions.answer3"
+                                                       :answer4="questions.answer4"
                                         >
                                         </passquestions>
                                     </div>
                                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                        <button v-on:get_question="send_answer"></button>
+                                        <button
+                                            @click="send_answer"
+                                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Send Test
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -54,13 +60,24 @@
         props: ['data_title',
             'data_questions'],
         methods: {
-            send_answer(value,id,question) {
-
+            getAnswer(value, id, index) {
+                // console.log(value, id, index)
+                if(index in this.answers){
+                    this.answers[index][id] = value;
+                }else{
+                    this.answers[index] = {};
+                    this.answers[index][id] = value;
+                }
+                // this.answers[index] = {[id]:value}
+                console.log(this.answers)
+            },
+            send_answer() {
+                console.log('send_answer')
                 axios({
                     method: 'post',
-                    url: 'pass/',
+                    url: '/test/store/',
                     params: {},
-                    data: '',
+                    data: this.answers,
                 })
                     .then(function (response) {
                         console.log(response);

@@ -8,22 +8,23 @@ use App\Models\Question;
 
 class TestController extends Controller
 {
+
     public function actionIndex()
     {
         return view('createtest');
     }
 
-    public function passTest(Request $request, $id)
+    public function passTest(Request $request, int $id)
     {
+        // TODO добавить валидаци ответов
         $test_title = Test::where('id', $id)->select('description', 'name')->get();
         $question_collect = Test::find($id)->questions()->select('question', 'answer1', 'answer2', 'answer3', 'answer4')->get();
-//        var_dump($question_collect);
-
         return view('passtest', ['data_questions' => $question_collect, 'data_title' => $test_title]);
     }
 
     public function storeTest(Request $request)
     {
+//        TODO подправить валидацию так как изменились входные данные, перенести валидаци в оддельный файл
 //validation request data:
         $test = new Test();//model for tests
         $questions = new Question(); //model for tests questions
@@ -39,7 +40,6 @@ class TestController extends Controller
                     "$id.answer1" => ['required', 'max:255'],
                     "$id.answer2" => ['required', 'max:255'],
                     "$id.answer3" => ['required', 'max:255'],
-
                     "$id.answer4" => ['required', 'max:255'],
                     "$id.check_1" => ['required_without_all:check_2,check_3,check_4'],
                     "$id.check_2" => ['required_without_all:check_1,check_3,check_4'],
@@ -48,7 +48,7 @@ class TestController extends Controller
                 ]);
             }
         }
-        var_dump($request->session()->get('$errors'));
+//        var_dump($request->session()->get('$errors'));
 
 //save to bd test
         $test->name = $request->input('name');
@@ -74,7 +74,8 @@ class TestController extends Controller
         }
     }
 
-    public function getTest(){
+    public function getTest()
+    { // todo убрать, отладочная информация
         return view('test');
     }
 }

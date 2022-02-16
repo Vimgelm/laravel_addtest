@@ -5,7 +5,8 @@
                 <legend class="text-base font-medium text-gray-900">{{question}}</legend>
                 <div class="flex items-start">
                     <div class="flex items-center h-5">
-                        <checkbox id="check_1" v-on:input="send_check($event.target.value,$event.target.id)"></checkbox>
+                        <checkbox id="check_1"
+                                  @click="sendCheck($event.target.checked,$event.target.id, this.index)"></checkbox>
                     </div>
                     <div class="ml-3 text-sm">
                         <label for="check_1"
@@ -15,7 +16,8 @@
                 </div>
                 <div class="flex items-start">
                     <div class="flex items-center h-5">
-                        <checkbox id="check_2" v-on:input="send_check($event.target.value,$event.target.id)"></checkbox>
+                        <checkbox id="check_2"
+                                  v-on:click="sendCheck($event.target.checked,$event.target.id, this.index)"></checkbox>
                     </div>
                     <div class="ml-3 text-sm">
                         <label for="check_2"
@@ -25,7 +27,8 @@
                 </div>
                 <div class="flex items-start">
                     <div class="flex items-center h-5">
-                        <checkbox id="check_3" v-on:input="send_check($event.target.value,$event.target.id)"></checkbox>
+                        <checkbox id="check_3"
+                                  v-on:click="sendCheck($event.target.checked,$event.target.id, this.index)"></checkbox>
 
                     </div>
                     <div class="ml-3 text-sm">
@@ -36,7 +39,8 @@
                 </div>
                 <div class="flex items-start">
                     <div class="flex items-center h-5">
-                        <checkbox id="check_4" v-on:input="send_check($event.target.value,$event.target.id)"></checkbox>
+                        <checkbox id="check_4"
+                                  v-on:click="sendCheck($event.target.checked,$event.target.id, this.index)"></checkbox>
 
                     </div>
                     <div class="ml-3 text-sm">
@@ -64,15 +68,16 @@
             return {}
         },
         props:
-            ['question',
+            ['index',
+                'question',
                 'answer1',
                 'answer2',
                 'answer3',
                 'answer4',],
-        emits:['get_check'],
+        emits: ['getcheck'],
         methods: {
-            send_check(value, id){
-                this.$emit('get_check',value, id, this.question) //this.question это то что мы передаем когда заполняем данные в v-for
+            sendCheck(value, id, index) {
+                this.$emit('getcheck', value, id, index) //this.question это то что мы передаем когда заполняем данные в v-for
             }
         },
         components: {

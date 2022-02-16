@@ -19607,11 +19607,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  props: ['question', 'answer1', 'answer2', 'answer3', 'answer4'],
-  emits: ['get_check'],
+  props: ['index', 'question', 'answer1', 'answer2', 'answer3', 'answer4'],
+  emits: ['getcheck'],
   methods: {
-    send_check: function send_check(value, id) {
-      this.$emit('get_check', value, id, this.question); //this.question это то что мы передаем когда заполняем данные в v-for
+    sendCheck: function sendCheck(value, id, index) {
+      this.$emit('getcheck', value, id, index); //this.question это то что мы передаем когда заполняем данные в v-for
     }
   },
   components: {
@@ -20219,12 +20219,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: ['data_title', 'data_questions'],
   methods: {
-    send_answer: function send_answer(value, id, question) {
+    getAnswer: function getAnswer(value, id, index) {
+      // console.log(value, id, index)
+      if (index in this.answers) {
+        this.answers[index][id] = value;
+      } else {
+        this.answers[index] = {};
+        this.answers[index][id] = value;
+      } // this.answers[index] = {[id]:value}
+
+
+      console.log(this.answers);
+    },
+    send_answer: function send_answer() {
+      console.log('send_answer');
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'post',
-        url: 'pass/',
+        url: '/test/store/',
         params: {},
-        data: ''
+        data: this.answers
       }).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
@@ -20904,35 +20917,37 @@ var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   var _component_checkbox = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("checkbox");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("legend", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.question), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
     id: "check_1",
-    onInput: _cache[0] || (_cache[0] = function ($event) {
-      return $options.send_check($event.target.value, $event.target.id);
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.sendCheck($event.target.checked, $event.target.id, _this.index);
     })
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.answer1), 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
     id: "check_2",
-    onInput: _cache[1] || (_cache[1] = function ($event) {
-      return $options.send_check($event.target.value, $event.target.id);
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $options.sendCheck($event.target.checked, $event.target.id, _this.index);
     })
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.answer2), 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
     id: "check_3",
-    onInput: _cache[2] || (_cache[2] = function ($event) {
-      return $options.send_check($event.target.value, $event.target.id);
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $options.sendCheck($event.target.checked, $event.target.id, _this.index);
     })
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.answer3), 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
     id: "check_4",
-    onInput: _cache[3] || (_cache[3] = function ($event) {
-      return $options.send_check($event.target.value, $event.target.id);
+    onClick: _cache[3] || (_cache[3] = function ($event) {
+      return $options.sendCheck($event.target.checked, $event.target.id, _this.index);
     })
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.answer4), 1
   /* TEXT */
@@ -22252,48 +22267,52 @@ var _hoisted_7 = {
   "class": "mt-5 md:mt-0 md:col-span-2"
 };
 var _hoisted_8 = {
-  action: "#",
-  method: "POST"
+  "class": "text-base font-medium text-gray-900"
 };
 var _hoisted_9 = {
   "class": "text-base font-medium text-gray-900"
 };
 var _hoisted_10 = {
-  "class": "text-base font-medium text-gray-900"
-};
-var _hoisted_11 = {
   "class": "mt-4 space-y-4"
 };
-var _hoisted_12 = {
+var _hoisted_11 = {
   "class": "px-4 py-3 bg-gray-50 text-right sm:px-6"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_passquestions = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("passquestions");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("legend", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.data_title[0]['name']), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    action: "#",
+    onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return _ctx.submit && _ctx.submit.apply(_ctx, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("legend", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.data_title[0]['name']), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("legend", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.data_title[0]['description']), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("legend", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.data_title[0]['description']), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.data_questions, function (question) {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.data_questions, function (questions, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_passquestions, {
-      key: question.id,
-      question: question.question,
-      answer1: question.answer1,
-      answer2: question.answer2,
-      answer3: question.answer3,
-      answer4: question.answer4
+      onGetcheck: $options.getAnswer,
+      key: index,
+      index: index,
+      question: questions.question,
+      answer1: questions.answer1,
+      answer2: questions.answer2,
+      answer3: questions.answer3,
+      answer4: questions.answer4
     }, null, 8
     /* PROPS */
-    , ["question", "answer1", "answer2", "answer3", "answer4"]);
+    , ["onGetcheck", "index", "question", "answer1", "answer2", "answer3", "answer4"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onGet_question: _cache[0] || (_cache[0] = function () {
+  ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = function () {
       return $options.send_answer && $options.send_answer.apply($options, arguments);
-    })
-  }, null, 32
+    }),
+    "class": "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+  }, " Send Test ")])], 32
   /* HYDRATE_EVENTS */
-  )])])])])])])])])]);
+  )])])])])])])]);
 }
 
 /***/ }),
