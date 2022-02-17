@@ -8,6 +8,7 @@
     <title>hello</title>
 </head>
 <body class="antialiased">
+<?php phpinfo();?>
 <h1>hello.blade.php</h1>
 <div id="app">
     <hello-world/>

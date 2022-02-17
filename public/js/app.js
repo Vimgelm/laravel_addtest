@@ -20217,7 +20217,7 @@ __webpack_require__.r(__webpack_exports__);
       answers: {}
     };
   },
-  props: ['data_title', 'data_questions'],
+  props: ['data_title', 'data_questions', 'id'],
   methods: {
     getAnswer: function getAnswer(value, id, index) {
       // console.log(value, id, index)
@@ -20232,10 +20232,11 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.answers);
     },
     send_answer: function send_answer() {
-      console.log('send_answer');
+      this.answers['id'] = this.id;
+      console.log(this.answers);
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'post',
-        url: '/test/store/',
+        url: '/test/pass/save/',
         params: {},
         data: this.answers
       }).then(function (response) {

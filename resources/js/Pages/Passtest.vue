@@ -58,7 +58,7 @@
             }
         },
         props: ['data_title',
-            'data_questions'],
+            'data_questions', 'id'],
         methods: {
             getAnswer(value, id, index) {
                 // console.log(value, id, index)
@@ -72,10 +72,11 @@
                 console.log(this.answers)
             },
             send_answer() {
-                console.log('send_answer')
+                this.answers['id'] = this.id;
+                console.log(this.answers)
                 axios({
                     method: 'post',
-                    url: '/test/store/',
+                    url: '/test/pass/save/',
                     params: {},
                     data: this.answers,
                 })

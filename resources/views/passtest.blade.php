@@ -12,6 +12,7 @@
 <div id="app">
 <passtest :data_questions='{!! json_encode($data_questions) !!}'
           :data_title='{!! json_encode($data_title) !!}'
+          :id='{!! json_encode($id) !!}'
 >
 
 </passtest>

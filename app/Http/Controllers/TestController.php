@@ -5,23 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Test;
 use App\Models\Question;
-
+use App\Models\Response;
+use App\Http\Requests\CompareResponses;
 class TestController extends Controller
 {
-
+    /**
+     * view create test page
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function actionIndex()
     {
         return view('createtest');
     }
 
+    /**
+     * view page for passing the test
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function passTest(Request $request, int $id)
     {
-        // TODO добавить валидаци ответов
         $test_title = Test::where('id', $id)->select('description', 'name')->get();
         $question_collect = Test::find($id)->questions()->select('question', 'answer1', 'answer2', 'answer3', 'answer4')->get();
-        return view('passtest', ['data_questions' => $question_collect, 'data_title' => $test_title]);
+
+        return view('passtest', ['data_questions' => $question_collect, 'data_title' => $test_title, 'id'=>$id]);
     }
 
+    /**
+     * this route validate and save data for create page
+     * @param Request $request
+     */
     public function storeTest(Request $request)
     {
 //        TODO подправить валидацию так как изменились входные данные, перенести валидаци в оддельный файл
@@ -72,6 +86,19 @@ class TestController extends Controller
                 $questions->save();
             }
         }
+    }
+
+    /**
+     * validate, compare and save user answers
+     * @param Request $request
+     */
+    public function saveAnswers(Request $request){
+        //todo валидация ответов в отдельный файл
+        $test_id = $request->input('id');
+
+        $correctAnswer = Question::where('test_id', $test_id)->select('check1','check2','check3','check4')->get();
+        $userAnswers = $request->all();
+        var_dump($correctAnswer->all());
     }
 
     public function getTest()
