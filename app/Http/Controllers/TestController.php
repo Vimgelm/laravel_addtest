@@ -97,8 +97,13 @@ class TestController extends Controller
         $test_id = $request->input('id');
 
         $correctAnswer = Question::where('test_id', $test_id)->select('check1','check2','check3','check4')->get();
+        $correctAnswer =$correctAnswer->toArray();
+
         $userAnswers = $request->all();
-        var_dump($correctAnswer->all());
+        unset($userAnswers['id']);
+        //сравниваем ответы юзера
+        $testResult = new CompareResponses();
+        $testResult->compareUserAnswers($correctAnswer, $userAnswers);
     }
 
     public function getTest()
