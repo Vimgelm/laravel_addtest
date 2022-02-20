@@ -1,5 +1,7 @@
 <template>
     <div>
+<textrow :name ="question.quest_name"
+         v-on:input="addvalue($event.target.value,$event.target.id)"></textrow>
         <mylabel for="question" value="Question">{{question.quest_name}}</mylabel>
         <myinput v-on:input="addvalue($event.target.value,$event.target.id)" id="question" type="text"
                  class="mt-1 block w-full"/>
@@ -52,7 +54,8 @@
     import mylabel from '@/Components/Label';
     import myinput from '@/Components/Input';
     import mycheckbox from '@/Components/Checkbox';
-    import mybutton from '@/Components/Button'
+    import mybutton from '@/Components/Button';
+    import textrow from '@/Components/Textarea';
 
     export default {
         data() {
@@ -78,7 +81,8 @@
             mylabel,
             myinput,
             mycheckbox,
-            mybutton
+            mybutton,
+            textrow
         },
     }
 </script>

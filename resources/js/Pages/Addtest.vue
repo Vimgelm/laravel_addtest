@@ -1,6 +1,6 @@
     <template>
-        <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-md w-full space-y-8">
+        <div class="min-h-full flex items-center justify-start py-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-xl w-full space-y-8">
                 <div class="p-error" v-for="error in errors">{{error[0]}}</div>
         <form class="mt-8 space-y-6" @submit.prevent="submit">
             <div>
@@ -13,12 +13,9 @@
             </div>
 
             <div>
-                <mylabel for="description" value="Description"></mylabel>
-                <myinput v-bind:value="description"
-                         @input="description = $event.target.value"
-                         id="description"
-                         type="text"
-                         class="mt-1 block w-full"/>
+                <textrow :name="'Description:'"
+                         v-bind:value="description"
+                         @input="description = $event.target.value"></textrow>
             </div>
             <div>
                 <question_c  v-for="question in test.questions"
@@ -43,6 +40,8 @@
         import question_c from '@/Components/test/question.vue';
         import axios from 'axios';
         import question from "@/Components/test/question";
+        import textrow from "@/Components/Textarea";
+
         export default {
             name: "addtest",
             data(){
@@ -59,7 +58,7 @@
                     var id = Date.now();
                     var new_question = {
                         id: id,
-                        quest_name:"question123"
+                        quest_name:"Question:"
                     };
                         this.test.questions[this.questions_count] = new_question;
                     this.questions_count += 1;
@@ -109,6 +108,7 @@
                 mylabel,
                 mybutton,
                 axios,
+                textrow,
             },
         }
     </script>
