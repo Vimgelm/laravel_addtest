@@ -72,8 +72,14 @@
                 console.log(this.answers)
             },
             send_answer() {
+                for(var key in this.answers){
+                    if('check1' in this.answers[key]){}else{this.answers[key]['check1'] = false}
+                    if('check2' in this.answers[key]){}else{this.answers[key]['check2'] = false}
+                    if('check3' in this.answers[key]){}else{this.answers[key]['check3'] = false}
+                    if('check4' in this.answers[key]){}else{this.answers[key]['check4'] = false}
+                }
+                //добавить id текущего теста
                 this.answers['id'] = this.id;
-                console.log(this.answers)
                 axios({
                     method: 'post',
                     url: '/test/pass/save/',

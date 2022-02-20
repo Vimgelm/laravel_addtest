@@ -20232,8 +20232,26 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.answers);
     },
     send_answer: function send_answer() {
+      for (var key in this.answers) {
+        if ('check1' in this.answers[key]) {} else {
+          this.answers[key]['check1'] = false;
+        }
+
+        if ('check2' in this.answers[key]) {} else {
+          this.answers[key]['check2'] = false;
+        }
+
+        if ('check3' in this.answers[key]) {} else {
+          this.answers[key]['check3'] = false;
+        }
+
+        if ('check4' in this.answers[key]) {} else {
+          this.answers[key]['check4'] = false;
+        }
+      } //добавить id текущего теста
+
+
       this.answers['id'] = this.id;
-      console.log(this.answers);
       axios__WEBPACK_IMPORTED_MODULE_0___default()({
         method: 'post',
         url: '/test/pass/save/',
@@ -20836,7 +20854,7 @@ var _hoisted_6 = {
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "check_1",
+  "for": "check1",
   "class": "font-medium text-gray-700"
 }, "Answer A:", -1
 /* HOISTED */
@@ -20856,7 +20874,7 @@ var _hoisted_11 = {
 };
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "check_2",
+  "for": "check2",
   "class": "font-medium text-gray-700"
 }, "Answer B:", -1
 /* HOISTED */
@@ -20876,7 +20894,7 @@ var _hoisted_16 = {
 };
 
 var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "check_3",
+  "for": "check3",
   "class": "font-meanswer2t-gray-700"
 }, "Answer C:", -1
 /* HOISTED */
@@ -20896,7 +20914,7 @@ var _hoisted_21 = {
 };
 
 var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "check_4",
+  "for": "check4",
   "class": "font-medium text-gray-700"
 }, "Answer D:", -1
 /* HOISTED */
@@ -20925,28 +20943,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("legend", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.question), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
-    id: "check_1",
+    id: "check1",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.sendCheck($event.target.checked, $event.target.id, _this.index);
     })
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.answer1), 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
-    id: "check_2",
+    id: "check2",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $options.sendCheck($event.target.checked, $event.target.id, _this.index);
     })
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.answer2), 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
-    id: "check_3",
+    id: "check3",
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $options.sendCheck($event.target.checked, $event.target.id, _this.index);
     })
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.answer3), 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_checkbox, {
-    id: "check_4",
+    id: "check4",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.sendCheck($event.target.checked, $event.target.id, _this.index);
     })

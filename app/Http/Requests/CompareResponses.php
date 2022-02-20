@@ -15,15 +15,19 @@ class CompareResponses
      */
     public function compareUserAnswers(array $correctAnswers, array $userAnswers)
     {
-        foreach ($userAnswers as $key => $answers){
-            if ($answers['answer1'] == $correctAnswers[$key]['answer1']
-            AND $answers['answer2'] == $correctAnswers[$key]['answer2']
-            AND $answers['answer3'] == $correctAnswers[$key]['answer3']
-            AND $answers['answer4'] == $correctAnswers[$key]['answer4']){
-                $this->testResults[key] = true;
+        $result = 0;
+        foreach ($correctAnswers as $key => $answers) {
+            if ($answers['check1'] == $userAnswers[$key]['check1'] and
+                $answers['check2'] == $userAnswers[$key]['check2'] and
+                $answers['check3'] == $userAnswers[$key]['check3'] and
+                $answers['check4'] == $userAnswers[$key]['check4']) {
+                $result += 1;
             }
         }
-        return $this->testResults;
+        $testResult['numberOfCorrect'] = $result;
+        $numberOfAnswer = count($correctAnswers);
+        $testResult['percent'] = $this->percentageResponses($result, $numberOfAnswer);
+        return $testResult;
     }
 
     /**
@@ -32,7 +36,8 @@ class CompareResponses
      * @param int $numberOfAnswer
      * @return float|int
      */
-    private function percentageResponses(array $testResult, int $numberOfAnswer){
-        return ($numberOfAnswer/(count($testResult)))*100;
+    private function percentageResponses(int $result, int $numberOfAnswer)
+    {
+        return $sd = ($result/$numberOfAnswer) * 100;
     }
 }
