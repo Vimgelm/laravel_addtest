@@ -45,22 +45,16 @@ class TestController extends Controller
 //validation request data:
         $request->validate([
             'name' => ['required', 'max:255'],
-            'description' => ['required', 'max:255']
+            'description' => ['required', 'max:500']
         ]);
-        foreach ($request->all() as $id => $question) {
-            if (isset($question['id'])) {
-                $request->validate([
-                    "$id.question" => ['required', 'max:255'],
-                    "$id.answer1" => ['required', 'max:255'],
-                    "$id.answer2" => ['required', 'max:255'],
-                    "$id.answer3" => ['required', 'max:255'],
-                    "$id.answer4" => ['required', 'max:255'],
-                    "$id.check_1" => ['required_without_all:check_2,check_3,check_4'],
-                    "$id.check_2" => ['required_without_all:check_1,check_3,check_4'],
-                    "$id.check_3" => ['required_without_all:check_1,check_2,check_4'],
-                    "$id.check_4" => ['required_without_all:check_1,check_2,check_3'],
-                ]);
-            }
+        foreach ($request->questions as $key=> $question){
+            $request->validate([
+                "$question[question]" => ['requred','max:500'],
+                "$question[answer1]" => ['requred','max:255'],
+                "$question[answer2]" => ['requred','max:255'],
+                "$question[answer3]" => ['requred','max:255'],
+                "$question[answer4]" => ['requred','max:255'],
+            ]);
         }
 //        var_dump($request->session()->get('$errors'));
 
@@ -71,20 +65,18 @@ class TestController extends Controller
         $test->save();
         $test_id = $test->id;
 //save to bd question for test
-        foreach ($request->all() as $key => $item) {
-            if (isset($item['id'])) {
+        foreach ($request->questions as $key => $item) {
                 $questions->test_id = $test_id;
-                $questions->question = $request->input("$key.question");
-                $questions->answer1 = $request->input("$key.answer1");
-                $questions->answer2 = $request->input("$key.answer2");
-                $questions->answer3 = $request->input("$key.answer3");
-                $questions->answer4 = $request->input("$key.answer4");
-                $questions->check1 = $request->boolean("$key.check_1", false);
-                $questions->check2 = $request->boolean("$key.check_2", false);
-                $questions->check3 = $request->boolean("$key.check_3", false);
-                $questions->check4 = $request->boolean("$key.check_4", false);
+                $questions->question = $item['question'];
+                $questions->answer1 = $item['answer1'];
+                $questions->answer2 = $item['answer2'];
+                $questions->answer3 = $item['answer3'];
+                $questions->answer4 = $item['answer4'];
+                $questions->check1 = $request->boolean("$questions[$key][check_1]", false);
+                $questions->check2 = $request->boolean("$questions[$key][check_2]", false);
+                $questions->check3 = $request->boolean("$questions[$key][check_3]", false);
+                $questions->check4 = $request->boolean("$questions[$key][check_4]", false);
                 $questions->save();
-            }
         }
     }
 

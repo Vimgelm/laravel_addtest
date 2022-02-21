@@ -2,7 +2,7 @@
     <div class="antialiased font-sans bg-gray-200 overflow-hidden">
         <div class="" style="">
             <div class="bg-gray-100">
-                <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <div class="max-w-5xl mx-auto py-6 sm:px-6 lg:px-8">
                     <div class="mt-10 sm:mt-0">
                         <div class="md:grid md:grid-cols-3 md:gap-6">
                             <div class="mt-5 md:mt-0 md:col-span-2">
